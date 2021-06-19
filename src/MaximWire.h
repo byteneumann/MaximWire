@@ -6,6 +6,7 @@ namespace MaximWire {
 
 // HAL platform-specific implementations
 #include "HAL/NRF52840.h"
+#include "HAL/AVR.h"
 
 class Bus;
 class Discovery;

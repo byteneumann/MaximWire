@@ -1,17 +1,20 @@
 
 # MaximWire
 
-This is very simple library to connect DS18B20 temperature sensors and Arduino NANO 33 BLE controllers.
+This is very simple library to connect DS18B20 temperature sensors and Arduino controllers.
+
+This fork adds a trivial, generic HAL implementation based on Arduino functions (pinMode, digitalRead) making the library usable with (m)any Arduino controller(s).
 
 Getting started
 ---------------
 
-By default, if you use only one DS18B20 device, you don't need external pull-up resistor.
-Just connect directly:
+By default, if you use only one DS18B20 device, you probably need an external pull-up resistor of 4.7kOhm. If the internal pull-up resistance is low enough, you may do without one.
 
 * +3.3V -> RED
 * BUS   -> YELLOW
 * GND   -> BLACK
+
+And connect BUS and +3.3V lines with pull-up resistor.
 
 Where BUS is any digital ping (like 9, for example).
 And use example from examples/AnyDevice.

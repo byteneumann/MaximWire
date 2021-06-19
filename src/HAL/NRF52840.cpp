@@ -1,3 +1,5 @@
+#if defined(ARDUINO_ARCH_NRF52840)
+
 #include <Arduino.h>
 #include <nrf_gpio.h>
 
@@ -87,3 +89,5 @@ bool HAL_NRF52840_INT_PULLUP::ResetPulse() {
 }
 
 }
+
+#endif

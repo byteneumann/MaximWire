@@ -13,5 +13,5 @@
         "include": null
     },
     "frameworks": "arduino",
-    "platforms": ["nordicnrf52", "mbed"]
+    "platforms": ["avr", "nordicnrf52", "mbed"]
 }
