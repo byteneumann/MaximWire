@@ -3,7 +3,12 @@
 
 This is very simple library to connect DS18B20 temperature sensors and Arduino controllers.
 
-This fork adds a trivial, generic HAL implementation based on Arduino functions (pinMode, digitalRead) making the library usable with (m)any Arduino controller(s).
+This fork adds two universal HAL implementation making the library usable with (m)any Arduino controller(s):
+
+* HAL\_Arduino: based on Arduino functions (pinMode, digitalRead, delayMicroseconds).
+* HAL\_AVR: based on AVR Libc functions and direct port access (PINx, PORTx, DDRx, \_delay\_us).
+
+HAL_AVR can save you some bytes but does less checks. Use with caution.
 
 Getting started
 ---------------
@@ -18,6 +23,8 @@ And connect BUS and +3.3V lines with pull-up resistor.
 
 Where BUS is any digital ping (like 9, for example).
 And use example from examples/AnyDevice.
+
+Select or overwrite your HAL by defining MAXIMWIRE_HAL.
 
 Multiple devices
 ----------------

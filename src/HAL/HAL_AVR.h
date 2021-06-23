@@ -10,7 +10,17 @@ static_assert(sizeof(int16_t) == 2);
 
 #include "HAL/Common.h"
 
-class HAL_AVR_EXT_PULLUP : public HAL_Common {
+class HAL_AVR_Common : public HAL_Common {
+public:
+    HAL_AVR_Common(uint8_t pin);
+protected:
+    uint8_t mask;
+    volatile uint8_t* reg_pin;
+    volatile uint8_t* reg_port;
+    volatile uint8_t* reg_ddr;
+};
+
+class HAL_AVR_EXT_PULLUP : public HAL_AVR_Common {
 public:
     HAL_AVR_EXT_PULLUP(uint8_t pin);
     void BusDown();
@@ -19,7 +29,7 @@ public:
     bool ResetPulse();
 };
 
-class HAL_AVR_INT_PULLUP : public HAL_Common {
+class HAL_AVR_INT_PULLUP : public HAL_AVR_Common {
 public:
     HAL_AVR_INT_PULLUP(uint8_t pin);
     void BusDown();
@@ -44,31 +54,31 @@ public:
     uint8_t ReadSlot() {
         noInterrupts();
         BusDown();
-        delayMicroseconds(2);
+        _delay_us(2);
         BusUp();
-        delayMicroseconds(5);
+        _delay_us(5);
         uint8_t r = BusRead();
         interrupts();
-        delayMicroseconds(50);
+        _delay_us(50);
         return r;
     }
     
     void WriteSlot0() {
         noInterrupts();
         BusDown();
-        delayMicroseconds(60);
+        _delay_us(60);
         BusUp();
         interrupts();
-        delayMicroseconds(2);
+        _delay_us(2);
     }
     
     void WriteSlot1() {
         noInterrupts();
         BusDown();
-        delayMicroseconds(2);
+        _delay_us(2);
         BusUp();
         interrupts();
-        delayMicroseconds(60);
+        _delay_us(60);
     }
 };
 

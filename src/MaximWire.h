@@ -4,9 +4,24 @@
 
 namespace MaximWire {
 
+#define MAXIMWIRE_HAL_NRF52840  1
+#define MAXIMWIRE_HAL_AVR       2
+#define MAXIMWIRE_HAL_ARDUINO   3
+
+#ifndef MAXIMWIRE_HAL
+#define MAXIMWIRE_HAL MAXIMWIRE_HAL_ARDUINO
+#endif
+
 // HAL platform-specific implementations
+#if MAXIMWIRE_HAL == MAXIMWIRE_HAL_NRF52840
 #include "HAL/NRF52840.h"
-#include "HAL/AVR.h"
+#elif MAXIMWIRE_HAL == MAXIMWIRE_HAL_AVR
+#include "HAL/HAL_AVR.h"
+#elif MAXIMWIRE_HAL == MAXIMWIRE_HAL_ARDUINO
+#include "HAL/HAL_Arduino.h"
+#else
+#error "unknown HAL specified!"
+#endif
 
 class Bus;
 class Discovery;
